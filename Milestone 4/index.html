@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editable Resume Builder</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    h1 {
+      text-align: center;
+      margin-top: 20px;
+    }
+    form {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    label, input, textarea {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    input, textarea {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    #resumeOutput {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    [contenteditable] {
+      border: 1px dashed #ccc;
+      padding: 4px;
+    }
+    [contenteditable]:hover {
+      border-color: #888;
+    }
+  </style>
+</head>
+<body>
+  <h1>Editable Resume By Kinza Khan</h1>
+
+  <form id="ResumeForm">
+    <fieldset>
+      <legend>Personal Information</legend>
+      <label for="fullName">Full Name:</label>
+      <input type="text" id="fullName" required>
+      
+      <label for="email">Email:</label>
+      <input type="email" id="email" required>
+      
+      <label for="phoneNumber">Phone Number:</label>
+      <input type="tel" id="phoneNumber" required>
+    </fieldset>
+
+    <fieldset>
+      <legend>Education</legend>
+      <label for="education">Education</label>
+      <textarea id="education" rows="3" required></textarea>
+    </fieldset>
+
+    <fieldset>
+      <legend>Experience</legend>
+      <label for="Experience">Experience</label>
+      <textarea id="Experience" rows="3" required></textarea>
+    </fieldset>
+
+    <fieldset>
+      <legend>Skills</legend>
+      <label for="skills">Skills</label>
+      <textarea id="skills" rows="3" required></textarea>
+    </fieldset>
+
+    <button type="submit">Generate Resume</button>
+  </form>
+
+  <div id="resumeOutput">
+    <!-- The dynamically generated resume will appear here -->
+  </div>
+
+  <script>
+    document.getElementById("ResumeForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      // Fetch the input elements
+      const nameElement = document.getElementById("fullName");
+      const emailElement = document.getElementById("email");
+      const phoneElement = document.getElementById("phoneNumber");
+      const educationElement = document.getElementById("education");
+      const experienceElement = document.getElementById("Experience");
+      const skillsElement = document.getElementById("skills");
+
+      // Ensure all elements are found
+      if (nameElement && emailElement && phoneElement && educationElement && experienceElement && skillsElement) {
+        const name = nameElement.value;
+        const email = emailElement.value;
+        const phone = phoneElement.value;
+        const education = educationElement.value;
+        const experience = experienceElement.value;
+        const skills = skillsElement.value;
+
+        // Create resume output
+        const resumeOutput = `
+          <h2 contenteditable="true">Resume</h2>
+          <p contenteditable="true"><b>Name:</b> ${name}</p>
+          <p contenteditable="true"><b>Email:</b> ${email}</p>
+          <p contenteditable="true"><b>Phone:</b> ${phone}</p>
+          <h3 contenteditable="true">Education</h3>
+          <p contenteditable="true">${education}</p>
+          <h3 contenteditable="true">Experience</h3>
+          <p contenteditable="true">${experience}</p>
+          <h3 contenteditable="true">Skills</h3>
+          <p contenteditable="true">${skills}</p>
+        `;
+
+        // Display the generated resume in the output div
+        const resumeOutputElement = document.getElementById("resumeOutput");
+        if (resumeOutputElement) {
+          resumeOutputElement.innerHTML = resumeOutput;
+        }
+      } else {
+        console.log("One or more input elements not found.");
+      }
+    });
+  </script>
+</body>
+</html>
